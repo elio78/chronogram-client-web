@@ -1,0 +1,23 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-royal">
+    <h1 class="title">Write History</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeHistoryForm()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doCreateHistory()">
+      <div class="badge">{{"Create History entry for task : "+tasks.name}}</div>
+        <div class="list">
+        <label class="item item-input">
+            <textarea rows="10" placeholder="write history content " ng-model="newHistory.description"></textarea>
+        </label>
+        </div>
+        <div>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Create</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

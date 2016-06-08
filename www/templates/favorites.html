@@ -1,0 +1,22 @@
+<ion-view view-title="My Subscriptions">
+    <ion-nav-buttons side="secondary">
+      <div class="buttons">
+        <button class="button button-icon icon ion-ios-minus-outline"
+          ng-click="toggleDelete()"></button>
+      </div>
+    </ion-nav-buttons>
+  <ion-content>
+    <ion-list show-delete="shouldShowDelete">
+         <ion-item ng-repeat="chronogram in chronograms | favoriteFilter:favorites" href="#/app/Chronograms/{{chronogram.id}}" class="item-thumbnail-left" on-swipe-left="deleteFavorite(chronogram.id)">
+         <img ng-src={{"img/"+chronogram.status+".png"}} alt="chronogram">
+        <h2>{{chronogram.name}}</h2>
+        <p>{{chronogram.description}}</p>
+          <p>{{chronogram.status}}</p>
+          <p>{{chronogram.id}}</p>
+        <ion-delete-button class="ion-minus-circled"
+          ng-click="deleteFavorite(chronogram.id)">
+        </ion-delete-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+ </ion-view>

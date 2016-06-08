@@ -1,0 +1,41 @@
+<ion-view view-title="Chronograms">
+    <ion-nav-buttons side="secondary">
+      <div class="buttons">
+        <button class="button button-icon icon ion-ios-plus"
+          ng-click="createChronogram()"></button>
+           <button class="button button-icon icon ion-trash-a" href="#/app/"
+          ng-click="toggleDelete()"></button>
+      </div>
+    </ion-nav-buttons>
+    <div class="tabs-striped tabs-color-royal">
+    <ul class="tabs">
+        <li ng-class="{active:isSelected(1)}" class="tab-item">
+            <a ng-click="select(1)">All</a></li>
+        <li ng-class="{active:isSelected(2)}" class="tab-item">
+            <a ng-click="select(2)">Defined</a></li>
+        <li ng-class="{active:isSelected(3)}" class="tab-item">
+            <a ng-click="select(3)">Running</a></li>
+        <li ng-class="{active:isSelected(4)}" class="tab-item">
+            <a  ng-click="select(4)">Incident</a></li>
+        <li ng-class="{active:isSelected(5)}" class="tab-item">
+            <a  ng-click="select(5)">Terminated</a></li>
+    </ul>
+  </div>
+<ion-content>
+    <ion-list show-delete="shouldShowDelete">
+      <ion-item ng-repeat="chronogram in chronograms | filter:{responsibles: username, status: filtText}" href="#/app/Chronograms/{{chronogram.id}}" class="item-thumbnail-left" on-swipe-left="deleteFavorite(chronogram.id)">
+        <img ng-src={{"img/"+chronogram.status+".png"}} alt="chronogram">
+        <h2>{{chronogram.name}}</h2>
+        <p>{{chronogram.description}}</p>
+          <p>{{chronogram.status}}</p>
+          <p>{{chronogram.id}}</p>
+          <ion-delete-button class="ion-minus-circled"
+          ng-click="deleteFavorite(chronogram.id)">
+        </ion-delete-button>
+          <ion-option-button class="button-assertive icon ion-plus-circled"
+            ng-click="addToFavorites(chronogram.id)">
+          </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

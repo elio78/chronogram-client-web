@@ -1,0 +1,55 @@
+<ion-view view-title="Chronogram details">
+     <ion-nav-buttons side="secondary">
+      <div class="buttons">
+        <button class="button button-icon icon ion-ios-plus" href="#/app/"
+          ng-click="createTask()"></button>
+          <button class="button button-icon icon ion-trash-a" href="#/app/"
+          ng-click="toggleDelete()"></button>
+      </div>
+    </ion-nav-buttons>
+     <div class="tabs-striped tabs-color-royal">
+    <ul class="tabs">
+        <li ng-class="{active:isSelected(1)}" class="tab-item">
+            <a ng-click="select(1)">All</a></li>
+        <li ng-class="{active:isSelected(2)}" class="tab-item">
+            <a ng-click="select(2)">Defined</a></li>
+        <li ng-class="{active:isSelected(3)}" class="tab-item">
+            <a ng-click="select(3)">Running</a></li>
+        <li ng-class="{active:isSelected(4)}" class="tab-item">
+            <a  ng-click="select(4)">Incident</a></li>
+        <li ng-class="{active:isSelected(5)}" class="tab-item">
+            <a  ng-click="select(5)">Terminated</a></li>
+    </ul>
+  </div>
+  <ion-content>
+    <div class="card">
+        <div class="item item-divider">
+            {{chronogram.name}}
+        </div>
+        <div class="badge">{{chronogram.status}}</div>
+        <div class="item item-thumbnail-left item-text-wrap">
+            <img ng-src={{"img/"+chronogram.status+".png"}} alt="chronogram">
+            <p>{{chronogram.description}}</p>
+            <div class="card">
+            <h4>{{"Start :"+chronogram.effectiveStartDate}}</h4>
+            <h4>{{"Duration :"+chronogram.effectiveDuration}}</h4>
+            <h4>{{"Owner :"+chronogram.CustomerId}}</h4>
+            </div>
+        </div>
+        
+    </div>
+ 
+    <ion-list show-delete="shouldShowDelete">
+      <ion-item ng-repeat="task in tasks | filter:{chronogramsId: chronogram.id, status: filtText}" href="#/app/Tasks/{{task.id}}" class="item-thumbnail-left" on-swipe-left="deleteTask(task.id)">
+        <img ng-src={{"img/"+task.status+".png"}} alt="task" width="10px">
+        <h2>{{task.name}}</h2>
+        <p>{{task.description}}</p>
+          <p>{{task.status}}</p>
+          <p>{{task.id}}</p>
+          <ion-delete-button class="ion-minus-circled"
+          ng-click="deleteTask({id:task.id})">
+        </ion-delete-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
